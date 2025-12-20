@@ -76,26 +76,26 @@ let increment = (id) =>{
     else{
         search.item += 1
     }
-    localStorage.setItem("data",JSON.stringify(basket))
     update(selectItem.id)
+    localStorage.setItem("data",JSON.stringify(basket))
 }
 
 // The decrement function
 let decrement = (id) =>{
     selectItem = id
     let search = basket.find((x)=> x.id === selectItem.id )
+    console.log(search)
     if(search === undefined) return
-    else if (search.item < 1 ){
-        console.log("Object has been removed!")
-    }
-
-    else if(search.item === 0) return
+    else if (search.item === 0) return
 
     else {
         search.item -= 1
+
     }
-    localStorage.setItem("data",JSON.stringify(basket))
     update(selectItem.id)
+    basket = basket.filter((x) => x.item !== 0 )
+    localStorage.setItem("data",JSON.stringify(basket))
+
     console.log(basket)
 } 
 
