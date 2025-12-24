@@ -22,6 +22,11 @@ i{
     margin-bottom: 30px;
 }
 
+a{
+    text-decoration: none;
+    color:  white;
+}
+
 /* icon style*/
 .cart {
     position: relative;
