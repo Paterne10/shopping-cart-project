@@ -107,3 +107,26 @@ a{
 .bi-plus-lg{
     color: green;
 }
+
+
+/* Cart css */
+
+.text-center{
+    display: flex;
+    flex-direction: column;
+    gap: 10PX;
+    align-items: center;
+}
+
+.btn{
+    background-color: #212529;
+    color: white;
+    padding: 6px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.btn:hover{
+    opacity: 90%;
+}
