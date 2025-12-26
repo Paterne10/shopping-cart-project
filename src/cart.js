@@ -10,7 +10,31 @@ let calculation = (basket) =>{
 let generateCart = (basket) => {
 
     if(basket.length !== 0){
-        console.log("Basket is not empty.")
+        return (shoppingCart.innerHTML = basket.map((x)=>{
+            let {id, item} = x
+            let search = shopItemData.find((y)=> y.id === id)
+            console.log(search)
+            return `
+            <div class=containerCart >
+                <img width="100px" src="${search.img}" alt="">
+                <div> 
+                    <div class=Articletitle>
+                        <p>Casual Short</p>
+                        <p>$ 45</p>
+                    </div>
+                    <div> 
+                        <iclass="bi bi-dash-lg"></i>
+                        <p>2</p>
+                        <i class="bi bi-plus-lg"></i>
+
+                    </div>
+                    <p>$90</p>
+                </div>
+
+            </div>
+
+            `
+        }))
     }
     else{
         shoppingCart.innerHTML = ``
