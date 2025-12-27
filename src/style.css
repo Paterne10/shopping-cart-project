@@ -159,4 +159,33 @@ a{
     border: 2px solid black ;
     display: flex;
     flex-direction: row;
+    gap: 10px;
+}
+
+.articleContainer{
+   
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+
+.articleTitle{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.price{
+    border:none;
+    background-color: #212529;
+    color: white;
+    border-radius: 3px;
+    padding: 2px 4px;
+}
+
+.containerIcon{
+    color: red;
+    
 }
