@@ -13,31 +13,39 @@ let generateCart = (basket) => {
         return (shoppingCart.innerHTML = basket.map((x)=>{
             let {id, item} = x
             let search = shopItemData.find((y)=> y.id === id)
+            let getItem = basket.find((x) => id === x.id )
             console.log(search)
             return `
-            <div class=containerCart >
-                <img width="100px" src="${search.img}" alt="">
-                <div class="articleContainer"> 
-                    <div class=articleTitle>
-                        <h4>Casual Short</h4>
-                        <div class="price">$ 45</div>
-                    </div>
-                    <div class=buttons > 
-                        <i class="bi bi-dash-lg"></i>
-                        <p>2</p>
-                        <i class="bi bi-plus-lg"></i>
+            <div class=shopping-cart>
+
+                <div class=cart-item>
+                    <img width="100px" src="${search.img}" alt="">
+                    <div class="details"> 
+                        <div class=details-title>
+                            <h4 class=title-price>          
+                                <p> ${search.name}</p>
+                                <p class="price"> $ ${search.price}</p>
+                            </h4>
+                            <div class="crossIcon"><i class="bi bi-x-lg"></i></div>         
+                        </div>
+                        <div class=cart-buttons>
+                            <div class="buttons">     
+                                <i class="bi bi-dash-lg"></i>
+                                <div>${getItem.item}</div>     
+                                <i class="bi bi-plus-lg"></i>
+                            </div>
+
+                        </div>
+                        <h3>$ ${search.price}</h3>
+
 
                     </div>
-                    <h3>$90</h3>
                 </div>
-                <div class="containerIcon">
-                    <i class="bi bi-x-lg"></i>
-                </div>
-
             </div>
 
             `
-        }))
+        }).join("")
+    )
     }
     else{
         shoppingCart.innerHTML = ``
@@ -55,3 +63,12 @@ let generateCart = (basket) => {
 calculation(basket)
 
 generateCart(basket)    
+
+{/* <div class=cart-buttons> 
+    <div class="buttons">     
+        <i class="bi bi-dash-lg"></i>
+        <div>${getItem.item}</div>     
+        <i class="bi bi-plus-lg"></i>
+    </div>
+</div>
+<h3>$ ${search.price}</h3> */}

@@ -132,10 +132,11 @@ a{
 }
 
 .shopping-cart{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(1, 320px);
+    gap: 15px;
     align-items: center;
+    justify-content: center;
 }
 .checkoutBtn{
     background-color: green;
@@ -148,32 +149,28 @@ a{
 
 .clearBtn{
     background-color: red;
-    padding: 6px;
+    /* padding: 6px; */
     color: white;
     border: none;
     border-radius: 3px;
 }
 
 
-.containerCart{
+.cart-item{
     border: 2px solid black ;
+    border-radius: 4px;
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    /* gap: 10px; */
 }
 
-.articleContainer{
-   
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
 
-}
 
-.articleTitle{
+.details-title{
+    width: 195px;
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -185,7 +182,17 @@ a{
     padding: 2px 4px;
 }
 
-.containerIcon{
+.crossIcon{
     color: red;
-    
+    font-weight: bold;
+    cursor: pointer;
+
+
+}
+
+.title-price{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
 }
