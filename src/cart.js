@@ -33,8 +33,7 @@ let generateCart = (basket) => {
                     <div class=cart-buttons>
                         <div class="buttons">     
                             <i onclick="decrement(${id})" class="bi bi-dash-lg"></i>
-                            ${console.log(id)}
-                            <div>${item}</div>     
+                            <div id=${id}>${item}</div>     
                             <i onclick="increment(${id})"  class="bi bi-plus-lg"></i>
                         </div>
 
