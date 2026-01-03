@@ -9,9 +9,64 @@ let calculation = (basket) =>{
     
 }
 
+// The update function
+let update = (id) =>{
+    let search = basket.find((x) => x.id === id )
+    document.getElementById(id).innerHTML = search.item
+    calculation(basket)
+
+ 
+
+}
+
+
+
+
+// The increment function
+
+let increment = (id) =>{
+    let selectItem = id
+    let search = basket.find((x)=> x.id === selectItem.id )
+    if (search === undefined){
+        basket.push({
+            id: selectItem.id,
+            item: 1        
+        })
+    } 
+    else{
+        search.item += 1
+    }
+    update(selectItem.id)
+    updatePrice()
+    localStorage.setItem("data",JSON.stringify(basket))
+}
+
+
+
+// The decrement function
+
+let decrement = (id) =>{
+    selectItem = id
+    let search = basket.find((x)=> x.id === selectItem.id )
+    console.log(search)
+    if(search === undefined) return
+    else if (search.item === 0) return
+
+    else {
+        search.item -= 1
+
+    }
+    update(selectItem.id)
+    updatePrice()
+    basket = basket.filter((x) => x.item !== 0 )
+    generateCart()
+    localStorage.setItem("data",JSON.stringify(basket))
+    console.log(basket)
+} 
+
 // The generate cart function
 
-let generateCart = (basket) => {
+let generateCart = () => {
 
     if(basket.length !== 0){
         return (shoppingCart.innerHTML = basket.map((x)=>{
@@ -38,7 +93,7 @@ let generateCart = (basket) => {
                         </div>
 
                     </div>
-                    <h3>$ ${search.price}</h3>
+                    <h3>$ ${search.price*item}</h3>
 
 
                 </div>
@@ -61,55 +116,17 @@ let generateCart = (basket) => {
     }
 }
 
+let updatePrice = (id) => {
+    let price = shopItemData.find((x)  => x.id === id )
+    let search = basket.find((x) => x.id === id )
+    document.querySelector("h3").innerHTML = search.item*price.price
+
+}
 
 calculation(basket)
 
 generateCart(basket)    
 
 
-// The increment function
 
-let increment = (id) =>{
-    let selectItem = id
-    let search = basket.find((x)=> x.id === selectItem.id )
-    if (search === undefined){
-        basket.push({
-            id: selectItem.id,
-            item: 1        
-        })
-    } 
-    else{
-        search.item += 1
-    }
-    update(selectItem.id)
-    localStorage.setItem("data",JSON.stringify(basket))
-}
 
-// The decrement function
-
-let decrement = (id) =>{
-    selectItem = id
-    let search = basket.find((x)=> x.id === selectItem.id )
-    console.log(search)
-    if(search === undefined) return
-    else if (search.item === 0) return
-
-    else {
-        search.item -= 1
-
-    }
-    update(selectItem.id)
-    basket = basket.filter((x) => x.item !== 0 )
-    localStorage.setItem("data",JSON.stringify(basket))
-
-    console.log(basket)
-} 
-
-// The update function
-let update = (id) =>{
-    let search = basket.find((x) => x.id === id )
-    document.getElementById(id).innerHTML = search.item
-    calculation(basket)
- 
-
-}
