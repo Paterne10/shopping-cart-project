@@ -19,9 +19,6 @@ let update = (id) =>{
 
 }
 
-
-
-
 // The increment function
 
 let increment = (id) =>{
@@ -36,14 +33,15 @@ let increment = (id) =>{
     else{
         search.item += 1
     }
+    generateCart()
     update(selectItem.id)
-    updatePrice()
     localStorage.setItem("data",JSON.stringify(basket))
 }
 
 
 
 // The decrement function
+
 
 let decrement = (id) =>{
     selectItem = id
@@ -57,13 +55,22 @@ let decrement = (id) =>{
 
     }
     update(selectItem.id)
-    updatePrice()
     basket = basket.filter((x) => x.item !== 0 )
     generateCart()
     localStorage.setItem("data",JSON.stringify(basket))
     console.log(basket)
 } 
 
+// The remove function
+let removeCard = (id) =>{
+    console.log(basket)
+    selectItem = id
+    console.log(selectItem.id)
+    console.log(selectItem.id)
+    let search = basket.find((x) =>{x.id === id})
+    console.log(search.id)
+
+}
 // The generate cart function
 
 let generateCart = () => {
@@ -83,7 +90,7 @@ let generateCart = () => {
                             <p> ${search.name}</p>
                             <p class="price"> $ ${search.price}</p>
                         </h4>
-                        <div class="crossIcon"><i class="bi bi-x-lg"></i></div>         
+                        <div onclick="removeCard(${id})" class="crossIcon"><i class="bi bi-x-lg"></i></div>         
                     </div>
                     <div class=cart-buttons>
                         <div class="buttons">     
@@ -116,17 +123,11 @@ let generateCart = () => {
     }
 }
 
-let updatePrice = (id) => {
-    let price = shopItemData.find((x)  => x.id === id )
-    let search = basket.find((x) => x.id === id )
-    document.querySelector("h3").innerHTML = search.item*price.price
 
-}
 
 calculation(basket)
 
 generateCart(basket)    
-
 
 
 
