@@ -62,13 +62,12 @@ let decrement = (id) =>{
 } 
 
 // The remove function
-let removeCard = (id) =>{
-    console.log(basket)
-    selectItem = id
-    console.log(selectItem.id)
-    console.log(selectItem.id)
-    let search = basket.find((x) =>{x.id === id})
-    console.log(search.id)
+let removeItem = (id) =>{
+    console.log("object deleted")
+    let selectedItem = id
+    console.log(selectedItem.id)
+    basket = basket.filter((x) => x.id !== selectedItem.id )
+    localStorage.setItem("data",JSON.stringify(basket))
 
 }
 // The generate cart function
@@ -90,7 +89,7 @@ let generateCart = () => {
                             <p> ${search.name}</p>
                             <p class="price"> $ ${search.price}</p>
                         </h4>
-                        <div onclick="removeCard(${id})" class="crossIcon"><i class="bi bi-x-lg"></i></div>         
+                        <i  onclick="removeItem(${id})" class="bi bi-x-lg"></i>
                     </div>
                     <div class=cart-buttons>
                         <div class="buttons">     
