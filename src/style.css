@@ -148,11 +148,11 @@ a{
 }
 
 .clearBtn{
-    background-color: red;
-    /* padding: 6px; */
+    color: red;
+    /* background-color: red;
     color: white;
     border: none;
-    border-radius: 3px;
+    border-radius: 3px; */
 }
 
 
