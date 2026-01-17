@@ -1,7 +1,7 @@
 let label = document.getElementById("label")
 let shoppingCart = document.getElementById("shopping-cart")
 let basket = JSON.parse(localStorage.getItem("data")) || []
-console.log(basket)
+
 
 let calculation = (basket) =>{
     let cartIcon = document.querySelector(".cartAmount")
@@ -46,7 +46,6 @@ let increment = (id) =>{
 let decrement = (id) =>{
     selectItem = id
     let search = basket.find((x)=> x.id === selectItem.id )
-    console.log(search)
     if(search === undefined) return
     else if (search.item === 0) return
 
@@ -58,18 +57,36 @@ let decrement = (id) =>{
     basket = basket.filter((x) => x.item !== 0 )
     generateCart()
     localStorage.setItem("data",JSON.stringify(basket))
-    console.log(basket)
 } 
 
 // The remove function
 let removeItem = (id) =>{
     console.log("object deleted")
-    let selectedItem = id
-    console.log(selectedItem.id)
+    let selectedItem = id   
     basket = basket.filter((x) => x.id !== selectedItem.id )
+    generateCart()
     localStorage.setItem("data",JSON.stringify(basket))
+ 
 
 }
+
+// Calculate total amount
+
+let totalAmount = ()  =>{
+    if(basket.length !== 0){
+        let amount = basket.map((x) => {
+            let {item, id} = x
+            let search = shopItemData.find((y) => y.id === id )
+            return search.price*item
+        }).reduce((x, y)  => x+y, 0 )
+        console.log(amount)
+    } else return
+
+    
+
+}
+
+
 // The generate cart function
 
 let generateCart = () => {
@@ -79,7 +96,7 @@ let generateCart = () => {
             let {id, item} = x
             let search = shopItemData.find((y)=> y.id === id)
             // let getItem = basket.find((x) => id === x.id )
-            console.log(search)
+            // console.log(search)
             return `
             <div class=cart-item>
                 <img width="100px" src="${search.img}" alt="">
@@ -89,11 +106,11 @@ let generateCart = () => {
                             <p> ${search.name}</p>
                             <p class="price"> $ ${search.price}</p>
                         </h4>
-                        <i  onclick="removeItem(${id})" class="bi bi-x-lg"></i>
+                        <i  onclick="removeItem(${id})" class="bi bi-x-lg clearBtn"></i>
                     </div>
                     <div class=cart-buttons>
                         <div class="buttons">     
-                            <i onclick="decrement(${id})" class="bi bi-dash-lg"></i>
+                            <i onclick="decrement(${id})" class="bi bi-dash-lg "></i>
                             <div id=${id}>${item}</div>     
                             <i onclick="increment(${id})"  class="bi bi-plus-lg"></i>
                         </div>
@@ -126,7 +143,9 @@ let generateCart = () => {
 
 calculation(basket)
 
-generateCart(basket)    
+generateCart(basket)   
+
+totalAmount()
 
 
 
