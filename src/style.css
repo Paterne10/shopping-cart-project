@@ -112,18 +112,25 @@ a{
 /* Cart css */
 
 .text-center{
-    display: flex;
+    text-align: center;
+    margin-bottom: 20px;
+    /* display: flex;
     flex-direction: column;
     gap: 10PX;
     align-items: center;
+    padding: 16px; */
 }
 
-.btn{
+.btn,
+.checkout-button,
+.remove-all
+{
     background-color: #212529;
     color: white;
     padding: 6px;
     border: none;
-    border-radius: 2px;
+    border-radius: 3px;
+    margin-top: 10px;
     cursor: pointer;
 }
 
@@ -195,4 +202,16 @@ a{
     flex-direction: row;
     gap: 10px;
     align-items: center;
+}
+
+.checkout-button{
+    background-color: green ;
+
+
+}
+
+.remove-all{
+    background-color: #FF0000;
+
+
 }

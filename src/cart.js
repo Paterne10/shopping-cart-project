@@ -80,6 +80,13 @@ let totalAmount = ()  =>{
             return search.price*item
         }).reduce((x, y)  => x+y, 0 )
         console.log(amount)
+        label.innerHTML = `
+            <h2>Total Bill : $ ${amount} </h2>
+            <div class="container-buttons">
+                <button class="checkout-button"><p>Checkout</p></button>
+                <button class="remove-all"><p>Clear Cart</p></button>
+            </div>
+        `
     } else return
 
     
