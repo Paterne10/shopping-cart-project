@@ -3,7 +3,7 @@ let shoppingCart = document.getElementById("shopping-cart")
 let basket = JSON.parse(localStorage.getItem("data")) || []
 
 
-let calculation = (basket) =>{
+let calculation = () =>{
     let cartIcon = document.querySelector(".cartAmount")
     cartIcon.innerHTML = basket.map((x) => x.item).reduce((x, y) => x+y, 0 )
     
@@ -14,6 +14,7 @@ let update = (id) =>{
     let search = basket.find((x) => x.id === id )
     document.getElementById(id).innerHTML = search.item
     calculation(basket)
+    totalAmount()
 
  
 
@@ -65,7 +66,10 @@ let removeItem = (id) =>{
     let selectedItem = id   
     basket = basket.filter((x) => x.id !== selectedItem.id )
     generateCart()
+    totalAmount()
+    calculation()
     localStorage.setItem("data",JSON.stringify(basket))
+   
  
 
 }
@@ -77,6 +81,7 @@ let totalAmount = ()  =>{
         let amount = basket.map((x) => {
             let {item, id} = x
             let search = shopItemData.find((y) => y.id === id )
+            console.log(search.price*item)
             return search.price*item
         }).reduce((x, y)  => x+y, 0 )
         console.log(amount)
@@ -84,13 +89,17 @@ let totalAmount = ()  =>{
             <h2>Total Bill : $ ${amount} </h2>
             <div class="container-buttons">
                 <button class="checkout-button"><p>Checkout</p></button>
-                <button class="remove-all"><p>Clear Cart</p></button>
+                <button onclick="clearCart()" class="remove-all"><p>Clear Cart</p></button>
             </div>
         `
-    } else return
+    } else return    
+}
 
-    
-
+let clearCart = () =>{
+    basket = []
+    generateCart()
+    localStorage.setItem("data",JSON.stringify(basket))
+    calculation()
 }
 
 
@@ -101,17 +110,20 @@ let generateCart = () => {
     if(basket.length !== 0){
         return (shoppingCart.innerHTML = basket.map((x)=>{
             let {id, item} = x
+            console.log(shopItemData)
             let search = shopItemData.find((y)=> y.id === id)
+            console.log(search)
+            let {img, name, price} = search
             // let getItem = basket.find((x) => id === x.id )
             // console.log(search)
             return `
             <div class=cart-item>
-                <img width="100px" src="${search.img}" alt="">
+                <img width="100px" src="${img}" alt="">
                 <div class="details"> 
                     <div class=details-title>
                         <h4 class=title-price>          
-                            <p> ${search.name}</p>
-                            <p class="price"> $ ${search.price}</p>
+                            <p> ${name}</p>
+                            <p class="price"> $ ${price}</p>
                         </h4>
                         <i  onclick="removeItem(${id})" class="bi bi-x-lg clearBtn"></i>
                     </div>
@@ -123,7 +135,7 @@ let generateCart = () => {
                         </div>
 
                     </div>
-                    <h3>$ ${search.price*item}</h3>
+                    <h3>$ ${price*item}</h3>
 
 
                 </div>
@@ -142,15 +154,16 @@ let generateCart = () => {
                 <button class="btn">Back to Home</button>
             </a>
         `
+        console.log(basket)
         
     }
 }
 
 
 
-calculation(basket)
+calculation()
 
-generateCart(basket)   
+generateCart()   
 
 totalAmount()
 
